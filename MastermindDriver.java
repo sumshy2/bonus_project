@@ -19,5 +19,7 @@ public class MastermindDriver {
     	Pegs p = new Pegs(guess); //guess
     	p.processInput(code); //code
 */    
-    	}
+    	Game g = new Game();
+    	System.out.println(g.generateRandomCode());
+    }
 }
