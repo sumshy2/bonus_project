@@ -14,12 +14,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
-	String secretCode;
-	int numPegs; 
-	int numGuesses; 
-	int numColors; 
-	String extraColors;
-	ArrayList<Pegs> history;
+	private String secretCode;
+	private int numPegs; 
+	private int numColors; 
+	private String extraColors;
+	private ArrayList<Pegs> history;
 	
 	public Game(){
 		numGuesses = 12;  //DEFAULT
@@ -63,6 +62,9 @@ public class Game {
 		return print;
 	}
 	
+	public String getSecretCode(){
+		return secretCode;
+	}
 	
 	//generates random secret code of specified length
 	public String generateRandomCode(){

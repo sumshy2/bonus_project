@@ -48,6 +48,20 @@ public class MastermindDriver{
 	}
 	public void GUIMaker()
 	{
+		
+		
+		String rules = "The computer picks a sequence of colors. The number of colors is the code length. The default code\n" +
+		"length is typically 4 but you can specify what code length you want. The objective of the game is to guess\n"
+		+ "the exact positions of the colors in the computer's sequence. After filling a line with your guesses and \n" +
+		"clicking on the 'Check' button, the computer responses with the result of your guess. For each color in your\n"+
+		"guess that is in the correct color and correct position in the code sequence, the computer display a small\n"+
+		"black color on the right side of the current guess. For each color in your guess that is in the correct color\n"+
+		"but is NOT in the correct position in the code sequence, the computer display a small white color on the right\n" + 
+		"side of the current guess. You win the game when you manage to guess all the colors in the code sequence and\n" +
+		"when they all in the right position. You lose the game if you use all attempts without guessing the computer\n" +
+		"code sequence. When asked to input the number of guesses and number of pegs that you would like you can hit\n" +
+		"cancel on each pop-up to get a default of 12 guesses and 4 pegs. Continue?\n";
+		
 		ErrorCheck e = new ErrorCheck();
 		int option;
 		while(true){
@@ -57,7 +71,11 @@ public class MastermindDriver{
 			{
 				System.exit(-1);
 			}
-			
+			option = JOptionPane.showOptionDialog(null,rules, "RULES",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null);
+			if(option == JOptionPane.NO_OPTION)
+			{
+				System.exit(-1);
+			}
 			String extraOptions = JOptionPane.showInputDialog("How many guesses would you like?");
 			while(!e.checkGuess(extraOptions)){
 				JOptionPane.showMessageDialog(null, "Improper Input. Try again.");
@@ -66,7 +84,7 @@ public class MastermindDriver{
 			int guesses = Integer.parseInt(extraOptions);
 			
 			extraOptions = JOptionPane.showInputDialog("How many pegs would you like?");
-			while(!e.checkGuess(extraOptions)){
+			while(!e.checkPegs(extraOptions)){
 				JOptionPane.showMessageDialog(null, "Improper Input. Try again.");
 				extraOptions = JOptionPane.showInputDialog("How many guesses would you like?");
 			}
@@ -235,6 +253,7 @@ public class MastermindDriver{
 			option = JOptionPane.showOptionDialog(null, "Play Again?","Exit",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
 			if(option == JOptionPane.NO_OPTION)
 			{
+				JOptionPane.showMessageDialog(null, "Thanks for playing! Goodbye.");
 				System.exit(-1);
 			}
 		}
