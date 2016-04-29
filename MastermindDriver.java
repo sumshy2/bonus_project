@@ -50,6 +50,7 @@ public class MastermindDriver{
 	{
 		int option;
 		while(true){
+			Color background = new Color(230,230,250);
 			option = JOptionPane.showOptionDialog(null, "Would you like to play Mastermind?","MasterMind",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
 			if(option == JOptionPane.NO_OPTION)
 			{
@@ -78,32 +79,26 @@ public class MastermindDriver{
 			mainFrame.setLayout(new GridLayout (12,1));
 			JPanel[] grid = new JPanel[guesses];
 			JPanel[] pegGrid = new JPanel[guesses];
-
 			for(int i = 0; i < guesses; i ++)
 			{
 				grid[i] = new JPanel (new GridLayout(1,pegs));
 				pegGrid[i] = new JPanel (new GridLayout(1,pegs));
-
+				grid[i].setOpaque(true);
+				pegGrid[i].setOpaque(true);
+				grid[i].setBackground(background);
+				pegGrid[i].setBackground(background);
 			}
-//			JPanel pegGrid = new JPanel (new GridLayout(1,pegs));
-			DrawCircle[][] circle = new DrawCircle[guesses][pegs];
-			DrawCircle[][] pegCircle = new DrawCircle[guesses][pegs];
 
 			for(int i = 0; i < guesses; i ++)
 			{
-
 				for(int j = 0; j < pegs; j ++)
 				{
 					DrawCircle c = new DrawCircle(12, 12, Color.BLACK);
-					circle[i][j] = c;
 					grid[i].add(c);
 					DrawCircle pc = new DrawCircle(4,4, Color.gray);
-					pegCircle[i][j] = pc;
-					pegGrid[i].add(pc);
-					
+					pegGrid[i].add(pc);					
 				}
 			}
-	//		grid.add(pegGrid);
 			for(int i = 0; i < guesses; i ++)
 			{
 				grid[i].add(pegGrid[i]);
@@ -111,6 +106,7 @@ public class MastermindDriver{
 			}
 
 //			mainFrame.pack();
+			mainFrame.getContentPane().setBackground(background);
 			mainFrame.setVisible(true);
 	        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -189,29 +185,35 @@ public class MastermindDriver{
 	    					DrawCircle c = new DrawCircle(12, 12, color);
 	    					grid[turn - 1].remove(i);
 	    					grid[turn - 1].add(c, i);
-	    					grid[turn - 1].getRootPane().revalidate();
+//	    					grid[turn - 1].setBackground(background);
+	    					grid[turn - 1].revalidate();
+	    					grid[turn - 1].repaint();
 	            		}
+
 	            		int [] clues = g.runGame(guess);
 	            		for (int i = 0; i < clues[0]; i ++)
 	            		{
 	            			pegGrid[turn - 1].remove(i);
 	    					DrawCircle c = new DrawCircle(8, 8, Color.BLACK);
 	    					pegGrid[turn - 1].add(c, i);
-	    					pegGrid[turn - 1].getRootPane().revalidate();
-
+	//    					pegGrid[turn - 1].setBackground(background);
+	    					pegGrid[turn - 1].revalidate();
+	    					pegGrid[turn - 1].repaint();
 	            		}
 	            		for (int i = 0; i < clues[1]; i ++)
 	            		{
-	            			pegGrid[turn - 1].remove(i);
+	            			pegGrid[turn - 1].remove(i + clues[0]);
 	    					DrawCircle c = new DrawCircle(8, 8, Color.WHITE);
-	    					pegGrid[turn - 1].add(c, i);
-	    					pegGrid[turn - 1].getRootPane().revalidate();
-
+	    					pegGrid[turn - 1].add(c, i + clues[0]);
+//	    					pegGrid[turn - 1].setBackground(background);
+	    					pegGrid[turn - 1].revalidate();
+	    					pegGrid[turn - 1].repaint();
 	            		}
+
 	            		if(clues[0] == 4)
 	            		{
 		            		String options[] = {"OK"};
-							JOptionPane.showOptionDialog(null, "YOU WIN!!! \n" + guess,"Winner Over Here!",JOptionPane.NO_OPTION,JOptionPane.ERROR_MESSAGE,null, options, options[0] );            			
+							JOptionPane.showOptionDialog(null, "YOU WIN!!! \n" + guess,"Winner Over Here!",JOptionPane.NO_OPTION,JOptionPane.INFORMATION_MESSAGE,null, options, options[0] );            			
 							break;
 	            		}
 	            		turn -= 1;
