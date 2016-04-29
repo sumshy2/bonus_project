@@ -1,5 +1,8 @@
 package bonus_project;
-
+/*
+ * Dung Le
+ * Sumedh Shah
+ */
 /*Purpose: Takes in user input and secret code, 
  *checks for matches, and returns appropriate pegs*/
 

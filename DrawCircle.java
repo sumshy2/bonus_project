@@ -1,5 +1,8 @@
 package bonus_project;
-
+/*
+ * Dung Le
+ * Sumedh Shah
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

@@ -1,5 +1,8 @@
 package bonus_project;
-
+/*
+ * Dung Le
+ * Sumedh Shah
+ */
 import java.awt.List;
 
 /*GAME CLASS 
