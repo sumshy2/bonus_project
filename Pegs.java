@@ -12,6 +12,19 @@ public class Pegs {
 		this.userGuess = userGuess;
 	}
 	
+	//getter methods
+	public int getBlackPegs(){
+		return blackNum;
+	}
+	
+	public int getWhitePegs(){
+		return whiteNum;
+	}
+	
+	public String getGuess(){
+		return userGuess;
+	}
+	
 	//called by Game class and will run 12 times for 12 tries AT MOST (or until user gets it right)
 	//WHAT IT DOES: takes in secretCode and compares it with userGuess and changes the blackNum and whiteNum variables
 	public void processInput(String secretCode){
@@ -52,19 +65,6 @@ public class Pegs {
 		StringBuilder newCode = new StringBuilder(code);
 		newCode.setCharAt(index, '-');
 		return newCode.toString();
-	}
-	
-	//getter methods
-	public int getBlackPegs(){
-		return blackNum;
-	}
-	
-	public int getWhitePegs(){
-		return whiteNum;
-	}
-	
-	public String getGuess(){
-		return userGuess;
 	}
 	
 	

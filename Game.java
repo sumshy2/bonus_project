@@ -29,17 +29,17 @@ public class Game {
 		extraColors = new String();
 	}
 	public Game(int numPegs, int numGuesses, int numColors, String extraColors){
-		this.numGuesses = numGuesses;
 		this.numPegs = numPegs;
-		this.extraColors = extraColors;
+		this.numGuesses = numGuesses;
 		this.numColors = extraColors.length() + 6;
+		this.extraColors = extraColors;
 	}
 	
 	
 	//called by MastermindDriver class and will run as many times as the user wants it to run
 	//WHAT IT DOES: starts the game
 	public int[] runGame(String userInput){
-		int[] pegs = new int[3]; 
+		int[] pegs = new int[2]; 
 		Pegs p = new Pegs(userInput);
 		p.processInput(secretCode);
 		pegs = new int[]{p.getBlackPegs(),p.getWhitePegs()}; //print p.getBlackPegs() and p.getWhitePegs() to user give integer array (black, white) 
@@ -64,14 +64,13 @@ public class Game {
 	//generates random secret code of specified length
 	public String generateRandomCode(){
 		String secretCode = "";
-		//maroon, cyan {"M","C"}
+		//extra colors maroon, cyan {"M","C"}
 		String array = "BGOPRY"; //DEFAULT: blue, green, orange, purple, red, yellow
-		//if(extraColors)
 		String temp = new String();
 		for(int i = 0; i < array.length(); i++){
 			temp += array.charAt(i);
 			if(i+1 == array.length()){
-				if(extraColors.length() != 0){
+				if(extraColors != null){
 					for(int j = 0; j < extraColors.length(); j++){
 						temp += extraColors.charAt(j);
 					}
@@ -79,12 +78,13 @@ public class Game {
 			}
 		}
 		array = temp;
+		System.out.println(array);
 		int min = 0; 
 		int max = numColors - 1;
 		Random rand = new Random();
 		for(int i = 0; i < numPegs; i++){
 			int r = rand.nextInt((max - min) + 1) + min;
-			secretCode+=array.charAt(i);
+			secretCode+=array.charAt(r);
 		}
 		return secretCode;
 	}
