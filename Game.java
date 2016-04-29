@@ -21,7 +21,6 @@ public class Game {
 	private ArrayList<Pegs> history;
 	
 	public Game(){
-		numGuesses = 12;  //DEFAULT
 		numPegs = 4; //DEFAULT
 		numColors = 6; //DEFAULT
 		secretCode = generateRandomCode();
@@ -30,7 +29,6 @@ public class Game {
 	}
 	public Game(int numPegs, int numGuesses, int numColors, String extraColors){
 		this.numPegs = numPegs;
-		this.numGuesses = numGuesses;
 		this.numColors = extraColors.length() + 6;
 		this.extraColors = extraColors;
 		this.secretCode = generateRandomCode();
