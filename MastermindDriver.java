@@ -32,14 +32,14 @@ public class MastermindDriver{
 	private Color Y = Color.YELLOW;
 	private Color C = Color.CYAN;
 	private Color M = new Color(128, 0, 0);
-
+	private String keyColor = new String();
 
 	public MastermindDriver()
 	{
 		inputT = new InputText();
 		Colors = "BGOPRY";
 		regex = "[" + Colors + "]*";
-
+		keyColor = "<html>B - Blue<br>G - Green<br>O - Orange<br>R - Red<br>Y - Yellow<br>P - Purple<html>";
 	}
 	public static void main(String[] args)
 	{ 
@@ -51,6 +51,10 @@ public class MastermindDriver{
 		ErrorCheck e = new ErrorCheck();
 		int option;
 		while(true){
+			Colors = "BGOPRY";
+			regex = "[" + Colors + "]*";
+			keyColor = "<html>B - Blue<br>G - Green<br>O - Orange<br>R - Red<br>Y - Yellow<br>P - Purple<html>";
+
 			Color background = new Color(230,230,250);
 			option = JOptionPane.showOptionDialog(null, "Would you like to play Mastermind?","MasterMind",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
 			if(option == JOptionPane.NO_OPTION || option == JOptionPane.CLOSED_OPTION)
@@ -106,12 +110,16 @@ public class MastermindDriver{
 			{
 				Colors += "M";
 				extra += "M";
+				keyColor = keyColor.substring(0, keyColor.lastIndexOf('<'));
+				keyColor += "<br>M - Maroon<html>";
 			}
 			option = JOptionPane.showOptionDialog(null, "Would you like add Cyan to your color options?\nC will stand for Maroon","Color Options",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
 			if(option == JOptionPane.YES_OPTION)
 			{
 				Colors += "C";
 				extra += "C";
+				keyColor = keyColor.substring(0, keyColor.lastIndexOf('<'));
+				keyColor += "<br>C - Cyan<html>";
 			}
 			regex = "[" + Colors + "]*";
 			Game g = new Game(pegs, guesses, Colors.length(), extra);
@@ -160,13 +168,15 @@ public class MastermindDriver{
 			mainFrame.setVisible(true);
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
 			int turn = guesses;
 			while(turn > 0)
 			{
 				inputT.setInput("");
 				JFrame newInput = new JFrame("Guess");
+				newInput.setLayout(new GridLayout(2,1));
 				JPanel input = new JPanel();
+				JPanel input2 = new JPanel();
+				JLabel keys = new JLabel(keyColor, JLabel.CENTER);
 				final JTextField userText = new JTextField(6);
 				JButton checkButton = new JButton("Check");
 
@@ -181,9 +191,11 @@ public class MastermindDriver{
 						}
 					}
 				});
-				input.add(userText);
-				input.add(checkButton);
+				input.add(keys);
+				input2.add(userText);
+				input2.add(checkButton);
 				newInput.add(input);
+				newInput.add(input2);
 				newInput.pack();
 				newInput.setVisible(true);
 
