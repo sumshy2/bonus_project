@@ -27,12 +27,15 @@ public class Game {
 		numColors = 6; //DEFAULT
 		secretCode = generateRandomCode();
 		extraColors = new String();
+		history = new ArrayList<Pegs>();
 	}
 	public Game(int numPegs, int numGuesses, int numColors, String extraColors){
 		this.numPegs = numPegs;
 		this.numGuesses = numGuesses;
 		this.numColors = extraColors.length() + 6;
 		this.extraColors = extraColors;
+		secretCode = generateRandomCode();
+		history = new ArrayList<Pegs>();
 	}
 	
 	
