@@ -57,6 +57,21 @@ public class MastermindDriver{
 			{
 				System.exit(-1);
 			}
+			String rules = "The computer picks a sequence of colors.\nThe objective of the game is to guess the exact "
+					+ "positions of the colors in the computer's sequence.\nAfter filling a line with your guesses and clicking on the 'Check' button,\n"
+					+ "the computer responds with the result of your guess.\nFor each color in your"
+			+ " guess that is in the correct color and correct position in the code sequence,\n"
+			+ "the computer displays black on the right side.\nFor each color that is in the correct color but is NOT in the correct position, the computer displays white.\nYou win if you guess all the colors correctly and if they all in the right "
+			+ "position.\nYou lose the game if you use all attempts without guessing correctly.\n"
+			+ "NOTE: When asked to input the number of guesses and number of pegs that you would like\n"
+			+ "you can hit 'Cancel' on each pop-up to get a default of 12 guesses and 4 pegs.\n"
+			+ "Continue?\n";
+
+			option = JOptionPane.showOptionDialog(null,rules,"RULES!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
+			if(option == JOptionPane.NO_OPTION || option == JOptionPane.CLOSED_OPTION)
+			{
+				System.exit(-1);
+			}
 
 			String extraOptions = JOptionPane.showInputDialog("How many guesses would you like?\nYou may have 5 to 20 guesses");
 
