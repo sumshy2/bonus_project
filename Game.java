@@ -16,11 +16,13 @@ import java.util.Random;
 public class Game {
 	private String secretCode;
 	private int numPegs; 
+	private int numGuesses; 
 	private int numColors; 
 	private String extraColors;
 	private ArrayList<Pegs> history;
 	
 	public Game(){
+		numGuesses = 12;  //DEFAULT
 		numPegs = 4; //DEFAULT
 		numColors = 6; //DEFAULT
 		secretCode = generateRandomCode();
@@ -29,6 +31,7 @@ public class Game {
 	}
 	public Game(int numPegs, int numGuesses, int numColors, String extraColors){
 		this.numPegs = numPegs;
+		this.numGuesses = numGuesses;
 		this.numColors = extraColors.length() + 6;
 		this.extraColors = extraColors;
 		this.secretCode = generateRandomCode();
@@ -52,7 +55,7 @@ public class Game {
 		String print = new String();
 		for(int i = 0; i < history.size(); i ++)
 		{
-			String summary = "Guess " + (i+1) + history.get(i).getGuess() + 
+			String summary = "Guess " + (i+1) + " " + history.get(i).getGuess() + 
 			". Black pegs: " + history.get(i).getBlackPegs() + " White pegs: " + history.get(i).getWhitePegs();
 			print = print + summary + "\n";
 		}
@@ -60,9 +63,6 @@ public class Game {
 		return print;
 	}
 	
-	public String getSecretCode(){
-		return secretCode;
-	}
 	
 	//generates random secret code of specified length
 	public String generateRandomCode(){
@@ -77,6 +77,10 @@ public class Game {
 			int r = rand.nextInt((max - min) + 1) + min;
 			secretCode+=array.charAt(r);
 		}
+		return secretCode;
+	}
+	public String getSecretCode ()
+	{
 		return secretCode;
 	}
 }
