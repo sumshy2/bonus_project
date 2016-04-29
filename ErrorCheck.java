@@ -1,4 +1,8 @@
 package bonus_project;
+/*
+ * Dung Le
+ * Sumedh Shah
+ */
 
 public class ErrorCheck {
 	public ErrorCheck(){
