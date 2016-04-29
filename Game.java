@@ -18,64 +18,73 @@ public class Game {
 	int numPegs; 
 	int numGuesses; 
 	int numColors; 
-	String[] extraColors;
+	String extraColors;
+	ArrayList<Pegs> history;
 	
 	public Game(){
 		numGuesses = 12;  //DEFAULT
 		numPegs = 4; //DEFAULT
 		numColors = 6; //DEFAULT
 		secretCode = generateRandomCode();
-		extraColors = new String[0];
+		extraColors = new String();
 	}
-	public Game(int numPegs, int numGuesses, int numColors, String[] extraColors){
+	public Game(int numPegs, int numGuesses, int numColors, String extraColors){
 		this.numGuesses = numGuesses;
 		this.numPegs = numPegs;
 		this.extraColors = extraColors;
-		this.numColors = extraColors.length + 6;
+		this.numColors = extraColors.length() + 6;
 	}
 	
 	
 	//called by MastermindDriver class and will run as many times as the user wants it to run
 	//WHAT IT DOES: starts the game
-	public void runGame(){
-		
-		//while 12 guesses
-			//Prompt user for guess (get it into String variable userInput)
-			//Pegs p = new Pegs(userInput)
-			//p.processInput(secretCode)
-			//print p.getBlackPegs() and p.getWhitePegs() to user
-			//addToHistory(p); will add user's move to history of his moves
-			//IF USER GOT 4 BLACK PEGS, BREAK OUT OF WHILE LOOP!!!!
-			//decrement guesses by 1 if user didn't get 4 black pegs
-		//end while loop
+	public int[] runGame(String userInput){
+		int[] pegs = new int[3]; 
+		Pegs p = new Pegs(userInput);
+		p.processInput(secretCode);
+		pegs = new int[]{p.getBlackPegs(),p.getWhitePegs()}; //print p.getBlackPegs() and p.getWhitePegs() to user give integer array (black, white) 
+		history.add(p); //will add user's move to history of his moves
+		return pegs;
 	}
 	
-/*	//if user wants to get history of his moves and the pegs with the move
-	public void getHistory(){
-		
+	//if user wants to get history of his moves and the pegs with the move
+	public String getHistory(){
+		String print = new String();
+		for(int i = 0; i < history.size(); i ++)
+		{
+			String summary = "Guess " + (i+1) + history.get(i).getGuess() + 
+			". Black pegs: " + history.get(i).getBlackPegs() + " White pegs: " + history.get(i).getWhitePegs();
+			print = print + summary + "\n";
+		}
+		print.trim();
+		return print;
 	}
 	
-	//adds move to history of moves
-	public void addToHistory(Pegs p){
-		
-	}*/
 	
 	//generates random secret code of specified length
 	public String generateRandomCode(){
 		String secretCode = "";
-		//magenta, violet, auburn {"M","V","A"}
-		ArrayList<String> array = new ArrayList<String>(Arrays.asList(new String[] {"B","G","O","P","R","Y"}));
-		//String[] array = {"B","G","O","P","R","Y"}; //DEFAULT: blue, green, orange, purple, red, yellow
-/*		for(int i = 0; i < extraColors.length; i++){
-			array.add(extraColors[i]);
-		}*/
-
+		//maroon, cyan {"M","C"}
+		String array = "BGOPRY"; //DEFAULT: blue, green, orange, purple, red, yellow
+		//if(extraColors)
+		String temp = new String();
+		for(int i = 0; i < array.length(); i++){
+			temp += array.charAt(i);
+			if(i+1 == array.length()){
+				if(extraColors.length() != 0){
+					for(int j = 0; j < extraColors.length(); j++){
+						temp += extraColors.charAt(j);
+					}
+				}
+			}
+		}
+		array = temp;
 		int min = 0; 
 		int max = numColors - 1;
 		Random rand = new Random();
 		for(int i = 0; i < numPegs; i++){
 			int r = rand.nextInt((max - min) + 1) + min;
-			secretCode+=array.get(i);
+			secretCode+=array.charAt(i);
 		}
 		return secretCode;
 	}
