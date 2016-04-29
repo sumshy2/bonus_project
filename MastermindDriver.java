@@ -48,6 +48,7 @@ public class MastermindDriver{
 	}
 	public void GUIMaker()
 	{
+		ErrorCheck e = new ErrorCheck();
 		int option;
 		while(true){
 			Color background = new Color(230,230,250);
@@ -56,10 +57,21 @@ public class MastermindDriver{
 			{
 				System.exit(-1);
 			}
+			
 			String extraOptions = JOptionPane.showInputDialog("How many guesses would you like?");
+			while(!e.checkGuess(extraOptions)){
+				JOptionPane.showMessageDialog(null, "Improper Input. Try again.");
+				extraOptions = JOptionPane.showInputDialog("How many guesses would you like?");
+			}
 			int guesses = Integer.parseInt(extraOptions);
+			
 			extraOptions = JOptionPane.showInputDialog("How many pegs would you like?");
+			while(!e.checkGuess(extraOptions)){
+				JOptionPane.showMessageDialog(null, "Improper Input. Try again.");
+				extraOptions = JOptionPane.showInputDialog("How many guesses would you like?");
+			}
 			int pegs = Integer.parseInt(extraOptions);
+			
 			option = JOptionPane.showOptionDialog(null, "Would you like add Maroon to your color options?\nM will stand for Maroon","Color Options",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, null, null );
 			String extra = "";
 			if(option == JOptionPane.YES_OPTION)

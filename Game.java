@@ -36,7 +36,6 @@ public class Game {
 		this.extraColors = extraColors;
 		this.secretCode = generateRandomCode();
 		this.history = new ArrayList<Pegs>();
-
 	}
 	
 	
@@ -71,21 +70,6 @@ public class Game {
 		//extra colors maroon, cyan {"M","C"}
 		String array = "BGOPRY"; //DEFAULT: blue, green, orange, purple, red, yellow
 		array += extraColors;
-	/*	String temp = new String();
-		for(int i = 0; i < array.length(); i++){
-			temp += array.charAt(i);
-			if(i+1 == array.length()){
-				if(extraColors != null){
-					for(int j = 0; j < extraColors.length(); j++){
-						temp += extraColors.charAt(j);
-					}
-				}
-			}
-		}
-		
-		array = temp;
-		*/
-		System.out.println(array);
 		int min = 0; 
 		int max = numColors - 1;
 		Random rand = new Random();
@@ -93,7 +77,6 @@ public class Game {
 			int r = rand.nextInt((max - min) + 1) + min;
 			secretCode+=array.charAt(r);
 		}
-		System.out.println(secretCode);
 		return secretCode;
 	}
 }
